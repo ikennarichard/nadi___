@@ -1,0 +1,26 @@
+{
+  "name": "hybrid-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm-run-all -p dev:web dev:api",
+    "dev:web": "next dev apps/web",
+    "dev:api": "nest start --watch --path apps/api",
+    "build": "npm-run-all build:web build:api",
+    "build:web": "next build apps/web",
+    "build:api": "nest build --path apps/api",
+    "prisma:generate": "prisma generate --schema=packages/database/schema.prisma",
+    "prisma:migrate": "prisma migrate dev --schema=packages/database/schema.prisma"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "prisma": "^6.15.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.15.0"
+  }
+}
